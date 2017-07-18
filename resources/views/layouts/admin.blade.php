@@ -15,6 +15,7 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="/static/admin/assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/static/admin/assets/img/favicon.png">
+	@yield('head')
 </head>
 
 <body>
@@ -130,6 +131,7 @@
 <!-- Javascript -->
 <script src="/static/admin/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/static/admin/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+@yield('foot')
 </body>
 
 </html>
