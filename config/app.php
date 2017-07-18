@@ -152,6 +152,8 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		// Entrust
 		Zizaco\Entrust\EntrustServiceProvider::class,
+	    // Ide-Helper
+		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 	],
 	/*
 	|--------------------------------------------------------------------------
