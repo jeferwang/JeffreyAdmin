@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/static/admin/assets/vendor/linearicons/style.css">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="/static/admin/assets/css/main.css">
+	<link rel="stylesheet" href="/static/admin/assets/css/diy.css">
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="/static/admin/assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/static/admin/assets/img/favicon.png">
