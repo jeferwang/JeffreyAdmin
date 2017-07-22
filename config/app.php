@@ -1,4 +1,6 @@
 <?php
+
+
 return [
 	/*
 	|--------------------------------------------------------------------------
@@ -150,6 +152,8 @@ return [
 		// App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
+		// Admin后台每个视图都注入$adminMenu变量
+		App\Providers\AdminMenuProvider::class,
 		// Entrust
 		Zizaco\Entrust\EntrustServiceProvider::class,
 	    // Ide-Helper
