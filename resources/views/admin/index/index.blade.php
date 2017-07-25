@@ -4,7 +4,6 @@
     <div class="row">
         <div class="col-md-6">
 			<pre>
-                {{dump($adminMenu[0]->isActive())}}
 			</pre>
         </div>
         <div class="col-md-6">

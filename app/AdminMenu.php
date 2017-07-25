@@ -8,12 +8,22 @@ use Illuminate\Support\Facades\Route;
 class AdminMenu extends Model
 {
     public $timestamps = false;
+    protected $fillable = ['pid', 'text', 'route_name', 'url', 'icon_class'];
 
+    /**
+     * 获取当前菜单的子菜单
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function submenus()
     {
         return $this->hasMany(AdminMenu::class, 'pid', 'id');
     }
 
+    /**
+     * 当前路由为该菜单或其子菜单的路由时,菜单高亮显示
+     * 判断菜单是否需要附加active属性
+     * @return bool
+     */
     public function isActive()
     {
         if ($this->pid != 0) {

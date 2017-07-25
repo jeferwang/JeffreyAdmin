@@ -7,15 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="/static/admin/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/admin/assets/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/admin/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/linearicons/style.css')}}">
+    <!--LayUI-->
+    <link rel="stylesheet" href="{{asset(config('static.dir.vendor').'/layui/css/layui.css')}}">
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/static/admin/assets/css/main.css">
-    <link rel="stylesheet" href="/static/admin/assets/css/diy.css">
+    <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/css/diy.css')}}">
     <!-- ICONS -->
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/admin/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/static/admin/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset(config('static.dir.admin').'/assets/img/apple-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset(config('static.dir.admin').'/assets/img/favicon.png')}}">
     @yield('head')
 </head>
 
@@ -25,7 +27,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="brand">
-            <a href="index.html"><img src="/static/admin/assets/img/logo-dark.png" alt="Klorofil Logo"
+            <a href="index.html"><img src="{{asset(config('static.dir.admin').'/assets/img/logo-dark.png')}}" alt="Klorofil Logo"
                                       class="img-responsive logo"></a>
         </div>
         <div class="container-fluid">
@@ -34,7 +36,7 @@
             </div>
             <form class="navbar-form navbar-left">
                 <div class="input-group">
-                    <input type="text" value="" class="form-control" placeholder="Search dashboard...">
+                    <input value="" class="form-control" placeholder="Search dashboard...">
                     <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
                 </div>
             </form>
@@ -69,7 +71,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/static/admin/assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset(config('static.dir.admin').'/assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                             <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -164,8 +166,19 @@
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
-<script src="/static/admin/assets/vendor/jquery/jquery.min.js"></script>
-<script src="/static/admin/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{asset(config('static.dir.admin').'/assets/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{asset(config('static.dir.admin').'/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset(config('static.dir.vendor').'/jquery-form/jquery.form.min.js')}}"></script>
+<script src="{{asset(config('static.dir.vendor').'/layui/layui.js')}}"></script>
+<script>
+    //获取layer实例
+    $().ready(function () {
+        var csrfToken = "{{csrf_token()}}";
+        layui.use(['layer'], function () {
+            window.layer = layui.layer;
+        });
+    });
+</script>
 @yield('foot')
 </body>
 
