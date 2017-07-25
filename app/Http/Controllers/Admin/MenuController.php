@@ -35,6 +35,10 @@ class MenuController extends Controller
         if ($vali->fails()) {
             return ['status' => 'error', 'msg' => $vali->errors()->first()];
         }
+        // 判断新添加的菜单所指定的父级菜单是否存在
+        if (!AdminMenu::haveMenuId($request->input('pid'))) {
+            return ['status' => 'error', 'msg' => '父级菜单不存在 ! '];
+        }
         $create = AdminMenu::create($request->all());
         if ($create) {
             return ['status' => 'success', 'msg' => '添加菜单成功'];

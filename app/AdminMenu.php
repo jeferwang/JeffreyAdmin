@@ -41,4 +41,15 @@ class AdminMenu extends Model
             }
         }
     }
+
+    /**
+     * 判断数据库中是否含有包含这个Id的菜单
+     */
+    public static function haveMenuId($mid)
+    {
+        if ($mid == 0 || AdminMenu::where('id', $mid)->exists()) {
+            return true;
+        }
+        return false;
+    }
 }
