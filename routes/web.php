@@ -15,5 +15,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth'], function (
 	Route::group(['prefix'=>'menu','as'=>'menu.'], function () {
        Route::get('admin-menu-index','Admin\MenuController@adminMewnuIndex')->name('admin-menu-index');
         Route::post('add-admin-menu','Admin\MenuController@addAdminMenu')->name('add-admin-menu');
-	});
+        Route::post('del-admin-menu','Admin\MenuController@delAdminMenu')->name('del-admin-menu');
+    });
 });

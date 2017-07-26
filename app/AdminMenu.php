@@ -52,4 +52,23 @@ class AdminMenu extends Model
         }
         return false;
     }
+
+    /**
+     * 删除菜单
+     */
+    public static function deleteMenu($mid)
+    {
+        function del($m_id)
+        {
+            $submenus = AdminMenu::find($m_id)->submenus;
+            if (!$submenus->isEmpty()) {
+                foreach ($submenus as $submenu) {
+                    del($submenu->id);
+                }
+            }
+            AdminMenu::where('id', $m_id)->delete();
+        }
+
+        del($mid);
+    }
 }

@@ -64,7 +64,12 @@
                                 </a>
                             </td>
                             <td>修改</td>
-                            <td>删除</td>
+                            <td>
+                                <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$menu->id}})">
+                                    <span class="fa fa-close"></span>
+                                    删除
+                                </a>
+                            </td>
                         </tr>
                         @if(!$menu->submenus->isEmpty())
                             @foreach($menu->submenus as $submenu)
@@ -77,7 +82,12 @@
                                         </a>
                                     </td>
                                     <td>修改</td>
-                                    <td>删除</td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$submenu->id}})">
+                                            <span class="fa fa-close"></span>
+                                            删除
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
@@ -89,35 +99,95 @@
 @endsection
 @section('foot')
     <script>
+        // 默认AjaxForm选项
+        var ajaxFormOptions = {
+            beforeSubmit: function () {
+                layer.load(1);
+            }
+            , complete: function () {
+                layer.closeAll('loading');
+            }
+            , success: function (data) {
+                if (data.status === 'success') {
+                    layer.alert(data.msg, {icon: 6});
+                } else {
+                    layer.alert(data.msg, {icon: 5});
+                }
+            }
+            , error: function () {
+                layer.alert('网络服务器错误,请刷新重试 ! ', {icon: 2});
+            }
+        };
+        // 默认Ajax提交选项
+        var ajaxOption = {
+            beforeSend: function () {
+                layer.load(1);
+            }
+            , complete: function () {
+                layer.closeAll('loading');
+            }
+            , success: function (data) {
+                if (data.status === 'success') {
+                    layer.alert(data.msg, {icon: 6});
+                } else {
+                    layer.alert(data.msg, {icon: 5});
+                }
+            }
+            , error: function () {
+                layer.alert('网络服务器错误,请刷新重试 ! ', {icon: 2});
+            }
+        };
+        // 初始化AjaxForm
         $().ready(function () {
             $('#add-form').ajaxForm();
         });
+        // 添加新菜单
         $('#add-menu-button').on('click', function (eve) {
-            $('#add-form').ajaxSubmit({
-                beforeSubmit: function () {
-                    layer.load(1);
+            // 自定义成功之后的操作
+            ajaxFormOptions.success = function (data) {
+                if (data.status === 'success') {
+                    layer.alert(data.msg, {
+                        icon: 6
+                        , closeBtn: false
+                        , btn: ['刷新']
+                        , yes: function () {
+                            location.reload(true);
+                        }
+                    });
+                } else {
+                    layer.alert(data.msg, {icon: 5});
                 }
-                , complete: function () {
-                    layer.closeAll('loading');
-                }
-                , success: function (data) {
-                    if (data.status === 'success') {
-                        layer.alert(data.msg, {
-                            icon: 6
-                            ,closeBtn:false
-                            , btn: ['刷新']
-                            , yes: function () {
-                                location.reload(true);
-                            }
-                        });
-                    } else {
-                        layer.alert(data.msg, {icon: 5});
-                    }
-                }
-                , error: function () {
-                    layer.alert('网络服务器错误,请刷新重试 ! ', {icon: 2});
-                }
-            });
+            };
+            // 带上配置进行提交
+            $('#add-form').ajaxSubmit(ajaxFormOptions);
         });
+
+        // 删除菜单
+        function deleteMenu(mid) {
+            layer.alert('确认删除此菜单以及所包含的子菜单吗 ? ', {
+                icon: 3
+                , btn: ['删除', '取消']
+                , yes: function () {
+                    ajaxOption.method = 'POST';
+                    ajaxOption.url = '{{route('admin.menu.del-admin-menu')}}';
+                    ajaxOption.data = {'_token': csrfToken, 'mid': mid};
+                    ajaxOption.success = function (data) {
+                        if (data.status === 'success') {
+                            layer.alert(data.msg, {
+                                icon: 6
+                                , closeBtn: false
+                                , btn: ['刷新']
+                                , yes: function () {
+                                    location.reload(true);
+                                }
+                            });
+                        } else {
+                            layer.alert(data.msg, {icon: 5});
+                        }
+                    };
+                    $.ajax(ajaxOption);
+                }
+            })
+        }
     </script>
 @endsection

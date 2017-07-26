@@ -173,7 +173,7 @@
 <script>
     //获取layer实例
     $().ready(function () {
-        var csrfToken = "{{csrf_token()}}";
+        window.csrfToken = "{{csrf_token()}}";
         layui.use(['layer'], function () {
             window.layer = layui.layer;
         });

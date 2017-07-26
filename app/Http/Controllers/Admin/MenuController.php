@@ -46,4 +46,10 @@ class MenuController extends Controller
             return ['status' => 'error', 'msg' => '添加菜单失败,请刷新重试'];
         }
     }
+
+    public function delAdminMenu(Request $request)
+    {
+        AdminMenu::deleteMenu($request->input('mid'));
+        return ['status' => 'success', 'msg' => '删除成功 !'];
+    }
 }
