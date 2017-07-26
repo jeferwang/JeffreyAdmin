@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/vendor/linearicons/style.css')}}">
-    <!--LayUI-->
+    <!--
+    LayUI
     <link rel="stylesheet" href="{{asset(config('static.dir.vendor').'/layui/css/layui.css')}}">
+    -->
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset(config('static.dir.admin').'/assets/css/diy.css')}}">
@@ -170,6 +172,7 @@
 <script src="{{asset(config('static.dir.admin').'/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset(config('static.dir.vendor').'/jquery-form/jquery.form.min.js')}}"></script>
 <script src="{{asset(config('static.dir.vendor').'/layui/layui.js')}}"></script>
+<script src="{{asset('/js/myAjax.js')}}"></script>
 <script>
     //获取layer实例
     $().ready(function () {

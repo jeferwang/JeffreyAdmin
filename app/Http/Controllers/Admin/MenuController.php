@@ -47,9 +47,52 @@ class MenuController extends Controller
         }
     }
 
+    /**
+     * 删除后台菜单
+     * @param Request $request
+     * @return array
+     */
     public function delAdminMenu(Request $request)
     {
         AdminMenu::deleteMenu($request->input('mid'));
         return ['status' => 'success', 'msg' => '删除成功 !'];
+    }
+
+    /**
+     * 修改后台菜单
+     */
+    public function alterAdminMenu(Request $request)
+    {
+        $menu = AdminMenu::find($request->route('mid'));
+        if(!$menu){
+            return ['status' => 'error', 'msg' => '找不到菜单'];
+        }
+        if ($request->isMethod('get')) {
+            $menus = AdminMenu::where('pid', 0)->get();
+            return view('admin.menu.admin-menu-alter', ['menus' => $menus, 'menu' => $menu]);
+        } else {
+            //验证器
+            $vali = validator($request->all(), [
+                'text' => ['required'],
+                'pid' => ['required', 'numeric'],
+            ], [
+                'text.required' => '菜单名称必须填写 ! ',
+                'pid.required' => '上级菜单参数缺失 ! ',
+                'pid.numeric' => '上级菜单参数个数错误 ! ',
+            ]);
+            if ($vali->fails()) {
+                return ['status' => 'error', 'msg' => $vali->errors()->first()];
+            }
+            // 判断新添加的菜单所指定的父级菜单是否存在
+            if (!AdminMenu::haveMenuId($request->input('pid'))) {
+                return ['status' => 'error', 'msg' => '父级菜单不存在 ! '];
+            }
+            $menu->fill($request->all());
+            if ($menu->save()) {
+                return ['status' => 'success', 'msg' => '修改成功 !'];
+            } else {
+                return ['status' => 'error', 'msg' => '修改失败 , 请刷新重试 !'];
+            }
+        }
     }
 }

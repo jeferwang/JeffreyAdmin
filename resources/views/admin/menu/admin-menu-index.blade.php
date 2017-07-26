@@ -30,11 +30,17 @@
                     <input class="form-control" name="url" id="url" placeholder="http://">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="icon" class="control-label">ICON图标样式</label>
-                    <input class="form-control" name="icon" id="icon" placeholder="Linearicons/FontAwesome">
+                    <label for="icon_class" class="control-label">ICON图标样式</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>图标 : </span>
+                            <span id="preview-icon"></span>
+                        </span>
+                        <input class="form-control" name="icon_class" id="icon_class" placeholder="Linearicons/FontAwesome" oninput="$('#preview-icon').attr('class',this.value)">
+                    </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <a href="javascript:void(0)" class="btn btn-success" id="add-menu-button">
+                    <a href="javascript:void(0)" class="btn btn-success btn-block" id="add-menu-button">
                         <span class="fa fa-plus"></span>
                         <br>
                         添加菜单
@@ -49,6 +55,7 @@
             <div class="panel-body">
                 <table class="table table-responsive table-bordered table-hover">
                     <tr>
+                        <th>图标</th>
                         <th>菜单名</th>
                         <th>路由名称</th>
                         <th>链接地址</th>
@@ -56,6 +63,13 @@
                     </tr>
                     @foreach($menus as $menu)
                         <tr>
+                            <td>
+                                @if($menu->icon_class!=null)
+                                    <span class="{{$menu->icon_class}}"></span>
+                                @else
+                                    无
+                                @endif
+                            </td>
                             <td>{{$menu->text}}</td>
                             <td>{{$menu->route_name}}</td>
                             <td>
@@ -63,7 +77,12 @@
                                     {{$menu->route_name!=null?call_user_func_array('route',[$menu->route_name]):$menu->url}}
                                 </a>
                             </td>
-                            <td>修改</td>
+                            <td>
+                                <a href="{{route('admin.menu.alter-admin-menu',['mid'=>$menu->id])}}" class="btn btn-warning btn-xs">
+                                    <span class="fa fa-pencil-square-o"></span>
+                                    修改
+                                </a>
+                            </td>
                             <td>
                                 <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$menu->id}})">
                                     <span class="fa fa-close"></span>
@@ -74,6 +93,13 @@
                         @if(!$menu->submenus->isEmpty())
                             @foreach($menu->submenus as $submenu)
                                 <tr>
+                                    <td>
+                                        @if($submenu->icon_class!=null)
+                                            <span class="{{$submenu->icon_class}}"></span>
+                                        @else
+                                            无
+                                        @endif
+                                    </td>
                                     <td>----{{$submenu->text}}</td>
                                     <td>{{$submenu->route_name}}</td>
                                     <td>
@@ -81,7 +107,12 @@
                                             {{$submenu->route_name!=null?call_user_func_array('route',[$submenu->route_name]):$submenu->url}}
                                         </a>
                                     </td>
-                                    <td>修改</td>
+                                    <td>
+                                        <a href="{{route('admin.menu.alter-admin-menu',['mid'=>$submenu->id])}}" class="btn btn-warning btn-xs">
+                                            <span class="fa fa-pencil-square-o"></span>
+                                            修改
+                                        </a>
+                                    </td>
                                     <td>
                                         <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$submenu->id}})">
                                             <span class="fa fa-close"></span>
@@ -99,44 +130,6 @@
 @endsection
 @section('foot')
     <script>
-        // 默认AjaxForm选项
-        var ajaxFormOptions = {
-            beforeSubmit: function () {
-                layer.load(1);
-            }
-            , complete: function () {
-                layer.closeAll('loading');
-            }
-            , success: function (data) {
-                if (data.status === 'success') {
-                    layer.alert(data.msg, {icon: 6});
-                } else {
-                    layer.alert(data.msg, {icon: 5});
-                }
-            }
-            , error: function () {
-                layer.alert('网络服务器错误,请刷新重试 ! ', {icon: 2});
-            }
-        };
-        // 默认Ajax提交选项
-        var ajaxOption = {
-            beforeSend: function () {
-                layer.load(1);
-            }
-            , complete: function () {
-                layer.closeAll('loading');
-            }
-            , success: function (data) {
-                if (data.status === 'success') {
-                    layer.alert(data.msg, {icon: 6});
-                } else {
-                    layer.alert(data.msg, {icon: 5});
-                }
-            }
-            , error: function () {
-                layer.alert('网络服务器错误,请刷新重试 ! ', {icon: 2});
-            }
-        };
         // 初始化AjaxForm
         $().ready(function () {
             $('#add-form').ajaxForm();
