@@ -9,6 +9,8 @@ class Permission extends Model
 {
 	use EntrustPermissionTrait;
 	
+	protected $fillable = ['name', 'display_name', 'description'];
+	
 	/**
 	 * 删除权限
 	 * 1,解除和角色的关系
