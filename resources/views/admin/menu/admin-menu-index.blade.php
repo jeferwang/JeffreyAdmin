@@ -66,8 +66,6 @@
                             <td>
                                 @if($menu->icon_class!=null)
                                     <span class="{{$menu->icon_class}}"></span>
-                                @else
-                                    无
                                 @endif
                             </td>
                             <td>{{$menu->text}}</td>
@@ -96,8 +94,6 @@
                                     <td>
                                         @if($submenu->icon_class!=null)
                                             <span class="{{$submenu->icon_class}}"></span>
-                                        @else
-                                            无
                                         @endif
                                     </td>
                                     <td>----{{$submenu->text}}</td>

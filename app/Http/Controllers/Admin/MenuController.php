@@ -11,7 +11,7 @@ class MenuController extends Controller
     /**
      * 后台菜单管理页面
      */
-    public function adminMewnuIndex()
+    public function adminMenuIndex()
     {
         $menus = AdminMenu::where('pid', 0)->get();
         return view('admin.menu.admin-menu-index', ['menus' => $menus]);

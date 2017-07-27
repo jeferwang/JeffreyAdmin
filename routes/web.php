@@ -9,13 +9,19 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+	// IndexController
     Route::group(['prefix' => 'index', 'as' => 'index.'], function () {
         Route::get('index', 'Admin\IndexController@index')->name('index');
     });
+    // MenuController
     Route::group(['prefix' => 'menu', 'as' => 'menu.'], function () {
-        Route::get('admin-menu-index', 'Admin\MenuController@adminMewnuIndex')->name('admin-menu-index');
+        Route::get('admin-menu-index', 'Admin\MenuController@adminMenuIndex')->name('admin-menu-index');
         Route::post('add-admin-menu', 'Admin\MenuController@addAdminMenu')->name('add-admin-menu');
         Route::post('del-admin-menu', 'Admin\MenuController@delAdminMenu')->name('del-admin-menu');
         Route::match(['get','post'],'alter-admin-menu/{mid}', 'Admin\MenuController@alterAdminMenu')->name('alter-admin-menu');
+    });
+    // RoleController
+    Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+	    Route::get('role-list','Admin\RoleController@roleList')->name('role-list');
     });
 });

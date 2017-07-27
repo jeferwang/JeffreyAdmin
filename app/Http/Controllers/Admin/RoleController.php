@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
 	public function roleList()
 	{
-		$roles=Role::all();
+		$roles = Role::all();
 		return view('admin.role.roleList');
-    }
+	}
 }
