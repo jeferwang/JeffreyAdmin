@@ -68,6 +68,18 @@
 			addForm.ajaxForm();
 		});
 		addBtn.on('click', function () {
+			ajaxFormOptions.success=function (data) {
+				if (data.status === 'success') {
+					layer.alert(data.msg, {
+						icon: 6
+						,yes:function(){
+							location.reload(true);
+						}
+					});
+				} else {
+					layer.alert(data.msg, {icon: 5});
+				}
+			};
 			addForm.ajaxSubmit(ajaxFormOptions);
 		});
 		$('.del-role-btn').on('click', function (event) {
