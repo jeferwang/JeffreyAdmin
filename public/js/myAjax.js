@@ -18,7 +18,10 @@ var ajaxFormOptions = {
     }
 };
 // 默认Ajax提交选项
-var ajaxOption = {
+var ajaxOptions = {
+    method:'POST',
+    url:null,
+    data:{},
     beforeSend: function () {
         layer.load(1);
     }
