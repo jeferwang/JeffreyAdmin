@@ -90,6 +90,18 @@
 				, yes: function () {
 					ajaxOptions.url = "{{route('admin.role.del-role')}}";
 					ajaxOptions.data = {'_token': csrfToken, 'rid': rid};
+					ajaxOptions.success=function (data) {
+						if (data.status === 'success') {
+							layer.alert(data.msg, {
+								icon: 6
+								,yes:function(){
+									location.reload(true);
+								}
+							});
+						} else {
+							layer.alert(data.msg, {icon: 5});
+						}
+					};
 					$.ajax(ajaxOptions);
 				}
 			})
