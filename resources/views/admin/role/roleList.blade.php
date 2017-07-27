@@ -55,7 +55,7 @@
 									@endforeach
 								</td>
 								<td style="white-space: nowrap;">
-									<a href="javascript:void(0)" class="btn btn-xs btn-primary">修改</a>
+									<a href="{{route('admin.role.edit-role',['rid'=>$role->id])}}" class="btn btn-xs btn-primary">修改</a>
 									<a href="javascript:void(0)" class="btn btn-xs btn-danger del-role-btn" data-id="{{$role->id}}">删除</a>
 								</td>
 							</tr>
