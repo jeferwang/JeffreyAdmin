@@ -25,4 +25,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 		Route::match(['get', 'post'], 'role-list', 'Admin\RoleController@roleList')->name('role-list');
 		Route::post('del-role', 'Admin\RoleController@delRole')->name('del-role');
 	});
+	// PermissionController
+	Route::group(['prefix' => 'permission', 'as' => 'permission.'], function () {
+		Route::match(['get', 'post'], 'permission-list', 'Admin\PermissionController@permissionList')->name('permission-list');
+		Route::post('del-permission', 'Admin\PermissionController@delPermission')->name('del-permission');
+	});
 });
