@@ -21,7 +21,7 @@ class RoleController extends Controller
 	{
 		if ($request->isMethod('get')) {
 			$roles = Role::all();
-			return view('admin.role.roleList', ['roles' => $roles]);
+			return view('admin.role.role-list', ['roles' => $roles]);
 		} else {
 			$validator = validator($request->all(), [
 				'name'         => ['required', Rule::unique('roles', 'name')],

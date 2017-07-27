@@ -21,7 +21,7 @@
 				<div class="col-md-3">
 					<a href="javascript:void(0)" id="permission-add" class="btn btn-success">
 						<span class="fa fa-plus-circle"></span>
-						Add
+						Add Permission
 					</a>
 				</div>
 			</div>
@@ -36,11 +36,12 @@
 						<th>Name</th>
 						<th>DisplayName</th>
 						<th>Description</th>
+						<th>Roles</th>
 						<th>Options</th>
 					</tr>
 					@if($permissions->isEmpty())
 						<tr>
-							<td colspan="4" style="text-align: center;">无数据</td>
+							<td colspan="5" style="text-align: center;">无数据</td>
 						</tr>
 					@else
 						@foreach($permissions as $permission)
@@ -48,6 +49,11 @@
 								<td>{{$permission->name}}</td>
 								<td>{{$permission->display_name}}</td>
 								<td>{{$permission->description}}</td>
+								<td>
+									@foreach($permission->roles as $role)
+										<span class="badge">{{$role->display_name}}</span>
+									@endforeach
+								</td>
 								<td style="white-space: nowrap;">
 									<a href="javascript:void(0)" class="btn btn-xs btn-primary">修改</a>
 									<a href="javascript:void(0)" class="btn btn-xs btn-danger del-permission-btn" data-id="{{$permission->id}}">删除</a>
@@ -68,11 +74,11 @@
 			addForm.ajaxForm();
 		});
 		addBtn.on('click', function () {
-			ajaxFormOptions.success=function (data) {
+			ajaxFormOptions.success = function (data) {
 				if (data.status === 'success') {
 					layer.alert(data.msg, {
 						icon: 6
-						,yes:function(){
+						, yes: function () {
 							location.reload(true);
 						}
 					});
@@ -90,11 +96,11 @@
 				, yes: function () {
 					ajaxOptions.url = "{{route('admin.permission.del-permission')}}";
 					ajaxOptions.data = {'_token': csrfToken, 'pmid': pmid};
-					ajaxOptions.success=function (data) {
+					ajaxOptions.success = function (data) {
 						if (data.status === 'success') {
 							layer.alert(data.msg, {
 								icon: 6
-								,yes:function(){
+								, yes: function () {
 									location.reload(true);
 								}
 							});

@@ -21,7 +21,7 @@
 				<div class="col-md-3">
 					<a href="javascript:void(0)" id="role-add" class="btn btn-success">
 						<span class="fa fa-plus-circle"></span>
-						Add
+						Add Role
 					</a>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 					</tr>
 					@if($roles->isEmpty())
 						<tr>
-							<td colspan="4" style="text-align: center;">无数据</td>
+							<td colspan="5" style="text-align: center;">无数据</td>
 						</tr>
 					@else
 						@foreach($roles as $role)
