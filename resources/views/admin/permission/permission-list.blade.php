@@ -55,7 +55,7 @@
 									@endforeach
 								</td>
 								<td style="white-space: nowrap;">
-									<a href="javascript:void(0)" class="btn btn-xs btn-primary">修改</a>
+									<a href="{{route('admin.permission.edit-permission',['pmid'=>$permission->id])}}" class="btn btn-xs btn-primary">修改</a>
 									<a href="javascript:void(0)" class="btn btn-xs btn-danger del-permission-btn" data-id="{{$permission->id}}">删除</a>
 								</td>
 							</tr>

@@ -30,5 +30,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 	Route::group(['prefix' => 'permission', 'as' => 'permission.'], function () {
 		Route::match(['get', 'post'], 'permission-list', 'Admin\PermissionController@permissionList')->name('permission-list');
 		Route::post('del-permission', 'Admin\PermissionController@delPermission')->name('del-permission');
+		Route::match(['get', 'post'], 'edit-permission/{pmid}', 'Admin\PermissionController@editPermission')->name('edit-permission');
+		
 	});
 });

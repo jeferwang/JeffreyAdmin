@@ -77,7 +77,7 @@ class RoleController extends Controller
 				// 更新角色的三个基本信息
 				$role->fill($request->all());
 				// 更新权限信息
-				$newPermissionsIdArray = $request->input('permissionsId');
+				$newPermissionsIdArray = $request->input('permissionsId',[]);
 				if ($role->save() && $role->updatePermissions($newPermissionsIdArray)) {
 					return ['status' => 'success', 'msg' => '更新角色信息成功 !'];
 				} else {

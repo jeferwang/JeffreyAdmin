@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 use Zizaco\Entrust\Traits\EntrustPermissionTrait;
 
 class Permission extends Model
@@ -25,5 +26,31 @@ class Permission extends Model
 		}
 		// 删除权限本身
 		return $this->delete();
+	}
+	
+	/**
+	 * 更新权限和角色的关联
+	 * @param $newRoleIdArray
+	 * @return bool
+	 */
+	public function updateRole($newRoleIdArray)
+	{
+		try {
+			foreach (Role::all() as $role) {
+				if ($role->hasPermission($this->name)) {
+					if (!in_array($role->id, $newRoleIdArray)) {
+						$role->detachPermission($this);
+					}
+				} else {
+					if (in_array($role->id, $newRoleIdArray)) {
+						$role->attachPermission($this);
+					}
+				}
+			}
+		} catch (Exception $e) {
+			\Log::error($e->getMessage());
+			return false;
+		}
+		return true;
 	}
 }
