@@ -36,6 +36,7 @@
 						<th>Name</th>
 						<th>DisplayName</th>
 						<th>Description</th>
+						<th>Permissions</th>
 						<th>Options</th>
 					</tr>
 					@if($roles->isEmpty())
@@ -48,6 +49,11 @@
 								<td>{{$role->name}}</td>
 								<td>{{$role->display_name}}</td>
 								<td>{{$role->description}}</td>
+								<td>
+									@foreach($role->perms as $perm)
+										<span class="badge">{{$perm->display_name}}</span>
+									@endforeach
+								</td>
 								<td style="white-space: nowrap;">
 									<a href="javascript:void(0)" class="btn btn-xs btn-primary">修改</a>
 									<a href="javascript:void(0)" class="btn btn-xs btn-danger del-role-btn" data-id="{{$role->id}}">删除</a>
@@ -68,11 +74,11 @@
 			addForm.ajaxForm();
 		});
 		addBtn.on('click', function () {
-			ajaxFormOptions.success=function (data) {
+			ajaxFormOptions.success = function (data) {
 				if (data.status === 'success') {
 					layer.alert(data.msg, {
 						icon: 6
-						,yes:function(){
+						, yes: function () {
 							location.reload(true);
 						}
 					});
@@ -90,11 +96,11 @@
 				, yes: function () {
 					ajaxOptions.url = "{{route('admin.role.del-role')}}";
 					ajaxOptions.data = {'_token': csrfToken, 'rid': rid};
-					ajaxOptions.success=function (data) {
+					ajaxOptions.success = function (data) {
 						if (data.status === 'success') {
 							layer.alert(data.msg, {
 								icon: 6
-								,yes:function(){
+								, yes: function () {
 									location.reload(true);
 								}
 							});
