@@ -60,6 +60,15 @@
 								</td>
 							</tr>
 						@endforeach
+						<tr>
+							<td colspan="5" style="text-align: center;">
+								@if($users->total()==1)
+									没有更多数据
+								@else
+									{{$users->links()}}
+								@endif
+							</td>
+						</tr>
 					@endif
 				</table>
 			</div>
@@ -101,7 +110,7 @@
 						if (data.status === 'success') {
 							layer.alert(data.msg, {
 								icon: 6
-								,btn:['刷新']
+								, btn: ['刷新']
 								, yes: function () {
 									location.reload(true);
 								}
