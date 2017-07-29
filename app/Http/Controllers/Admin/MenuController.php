@@ -13,7 +13,7 @@ class MenuController extends Controller
 	 */
 	public function adminMenuIndex()
 	{
-		$menus = AdminMenu::where('pid', 0)->get();
+		$menus = AdminMenu::where('pid', 0)->orderBy('sort_num', 'desc')->get();
 		return view('admin.menu.admin-menu-index', ['menus' => $menus]);
 	}
 	

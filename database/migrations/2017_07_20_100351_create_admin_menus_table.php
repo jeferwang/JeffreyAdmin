@@ -19,6 +19,7 @@ class CreateAdminMenusTable extends Migration
             $table->string('text')->nullable(false)->comment('菜单文字');
             $table->string('route_name')->nullable(true)->default(null)->comment('路由名称');
             $table->text('url')->nullable(true)->default(null)->comment('链接地址');
+            $table->integer('sort_num')->nullable(true)->default(0)->comment('排序 由大到小');
             $table->string('icon_class')->nullable(true)->default(null)->comment('css图标');
         });
     }

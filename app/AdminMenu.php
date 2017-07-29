@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 class AdminMenu extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['pid', 'text', 'route_name', 'url', 'icon_class'];
+    protected $fillable = ['pid', 'text', 'route_name', 'url', 'icon_class','sort_num'];
 
     /**
      * 获取当前菜单的子菜单
@@ -16,7 +16,7 @@ class AdminMenu extends Model
      */
     public function submenus()
     {
-        return $this->hasMany(AdminMenu::class, 'pid', 'id');
+        return $this->hasMany(AdminMenu::class, 'pid', 'id')->orderBy('sort_num','desc');
     }
 
     /**
