@@ -39,5 +39,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 		Route::post('add-admin-menu', 'Admin\MenuController@addAdminMenu')->name('add-admin-menu');
 		Route::post('del-admin-menu', 'Admin\MenuController@delAdminMenu')->name('del-admin-menu');
 		Route::match(['get', 'post'], 'alter-admin-menu/{mid}', 'Admin\MenuController@alterAdminMenu')->name('alter-admin-menu');
+		Route::post('update-admin-menu-sort', 'Admin\MenuController@updateAdminMenuSort')->name('update-admin-menu-sort');
 	});
 });

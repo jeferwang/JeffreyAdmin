@@ -71,7 +71,7 @@
 						<th>路由名称</th>
 						<th>链接地址</th>
 						<th>排序</th>
-						<th colspan="2">操作</th>
+						<th>操作</th>
 					</tr>
 					@foreach($menus as $menu)
 						<tr>
@@ -87,14 +87,14 @@
 									{{$menu->route_name!=null?call_user_func_array('route',[$menu->route_name]):$menu->url}}
 								</a>
 							</td>
-							<td>{{$menu->sort_num}}</td>
+							<td>
+								<input type="text" data-id="{{$menu->id}}" value="{{$menu->sort_num}}" style="width: 50px;" onchange="updateSort(this)">
+							</td>
 							<td>
 								<a href="{{route('admin.menu.alter-admin-menu',['mid'=>$menu->id])}}" class="btn btn-warning btn-xs">
 									<span class="fa fa-pencil-square-o"></span>
 									修改
 								</a>
-							</td>
-							<td>
 								<a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$menu->id}})">
 									<span class="fa fa-close"></span>
 									删除
@@ -116,14 +116,14 @@
 											{{$submenu->route_name!=null?call_user_func_array('route',[$submenu->route_name]):$submenu->url}}
 										</a>
 									</td>
-									<td>{{$submenu->sort_num}}</td>
+									<td>
+										<input type="text" data-id="{{$submenu->id}}" value="{{$submenu->sort_num}}" style="width: 50px;" onchange="updateSort(this)">
+									</td>
 									<td>
 										<a href="{{route('admin.menu.alter-admin-menu',['mid'=>$submenu->id])}}" class="btn btn-warning btn-xs">
 											<span class="fa fa-pencil-square-o"></span>
 											修改
 										</a>
-									</td>
-									<td>
 										<a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="deleteMenu({{$submenu->id}})">
 											<span class="fa fa-close"></span>
 											删除
@@ -191,6 +191,13 @@
 					$.ajax(ajaxOptions);
 				}
 			})
+		}
+		
+		function updateSort(ele) {
+			ajaxOptions.method = 'POST';
+			ajaxOptions.data = {'_token': csrfToken, 'mid': $(ele).attr('data-id'), 'sort_num': $(ele).val()};
+			ajaxOptions.url = "{{route('admin.menu.update-admin-menu-sort')}}";
+			$.ajax(ajaxOptions);
 		}
 	</script>
 @endsection
