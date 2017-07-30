@@ -98,4 +98,15 @@ class MenuController extends Controller
 			}
 		}
 	}
+	
+	public function updateAdminMenuSort(Request $request)
+	{
+		$menu = AdminMenu::find($request->input('mid'));
+		$sort_num = $request->input('sort_num');
+		if (!$menu) {
+			return ['status' => 'error', 'msg' => '找不到对应的菜单 !'];
+		}
+		$menu->sort_num = $sort_num;
+		return $menu->save() ? ['status' => 'success', 'msg' => '更新成功 !'] : ['status' => 'error', 'msg' => '保存失败,请查看错误日志 !'];
+	}
 }
