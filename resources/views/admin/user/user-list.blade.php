@@ -2,30 +2,32 @@
 @section('title','用户列表')
 @section('content')
 	<div class="row">
-		<form action="{{route('admin.user.add-user')}}" method="post" class="form-horizontal panel" id="add-user-form">
-			<h4 class="panel-heading">添加新用户</h4>
-			{{csrf_field()}}
-			<div class="form-group panel-body">
-				<label for="name" class="control-label col-md-1">Name</label>
-				<div class="col-md-2">
-					<input name="name" id="name" class="form-control">
+		<div class="col-md-12 panel">
+			<form action="{{route('admin.user.add-user')}}" method="post" class="form-horizontal" id="add-user-form">
+				<h4 class="panel-heading">添加新用户</h4>
+				{{csrf_field()}}
+				<div class="form-group panel-body">
+					<label for="name" class="control-label col-md-1">Name</label>
+					<div class="col-md-2">
+						<input name="name" id="name" class="form-control">
+					</div>
+					<label for="email" class="control-label col-md-1">Email</label>
+					<div class="col-md-2">
+						<input name="email" id="email" class="form-control">
+					</div>
+					<label for="password" class="control-label col-md-1">Password</label>
+					<div class="col-md-2">
+						<input name="password" id="password" class="form-control">
+					</div>
+					<div class="col-md-3">
+						<a href="javascript:void(0)" id="add-user" class="btn btn-success">
+							<span class="fa fa-plus-circle"></span>
+							Add User
+						</a>
+					</div>
 				</div>
-				<label for="email" class="control-label col-md-1">Email</label>
-				<div class="col-md-2">
-					<input name="email" id="email" class="form-control">
-				</div>
-				<label for="password" class="control-label col-md-1">Password</label>
-				<div class="col-md-2">
-					<input name="password" id="password" class="form-control">
-				</div>
-				<div class="col-md-3">
-					<a href="javascript:void(0)" id="add-user" class="btn btn-success">
-						<span class="fa fa-plus-circle"></span>
-						Add User
-					</a>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12 panel">

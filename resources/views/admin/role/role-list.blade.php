@@ -2,30 +2,32 @@
 @section('title','角色列表')
 @section('content')
 	<div class="row">
-		<form action="" method="post" class="form-horizontal panel" id="add-role-form">
-			<h4 class="panel-heading">添加新角色</h4>
-			{{csrf_field()}}
-			<div class="form-group panel-body">
-				<label for="name" class="control-label col-md-1">Name</label>
-				<div class="col-md-2">
-					<input name="name" id="name" class="form-control">
+		<div class="col-md-12 panel">
+			<form action="" method="post" class="form-horizontal" id="add-role-form">
+				<h4 class="panel-heading">添加新角色</h4>
+				{{csrf_field()}}
+				<div class="form-group panel-body">
+					<label for="name" class="control-label col-md-1">Name</label>
+					<div class="col-md-2">
+						<input name="name" id="name" class="form-control">
+					</div>
+					<label for="display_name" class="control-label col-md-1">DisplayName</label>
+					<div class="col-md-2">
+						<input name="display_name" id="display_name" class="form-control">
+					</div>
+					<label for="description" class="control-label col-md-1">Description</label>
+					<div class="col-md-2">
+						<input name="description" id="description" class="form-control">
+					</div>
+					<div class="col-md-3">
+						<a href="javascript:void(0)" id="role-add" class="btn btn-success">
+							<span class="fa fa-plus-circle"></span>
+							Add Role
+						</a>
+					</div>
 				</div>
-				<label for="display_name" class="control-label col-md-1">DisplayName</label>
-				<div class="col-md-2">
-					<input name="display_name" id="display_name" class="form-control">
-				</div>
-				<label for="description" class="control-label col-md-1">Description</label>
-				<div class="col-md-2">
-					<input name="description" id="description" class="form-control">
-				</div>
-				<div class="col-md-3">
-					<a href="javascript:void(0)" id="role-add" class="btn btn-success">
-						<span class="fa fa-plus-circle"></span>
-						Add Role
-					</a>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12 panel">
